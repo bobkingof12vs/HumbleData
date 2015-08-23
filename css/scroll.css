@@ -1,0 +1,35 @@
+.scrollInner{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.scrollY{
+  position: absolute;
+  height: 100px;
+  width: 10px;
+  left: 0px;
+  top: 0px;
+  background-color: #222;
+  transition: opacity .2s ease-in-out;
+}
+
+.scrollX{
+  position: absolute;
+  height: 10px;
+  width: 100px;
+  left: 0px;
+  top: 0px;
+  background-color: #222;
+  transition: opacity .2s ease-in-out;
+}
+
+.scrollOut{
+  opacity: 0;
+}
+
+.scrollIn{
+  opacity: .6;
+}

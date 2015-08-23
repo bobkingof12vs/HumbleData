@@ -1,0 +1,63 @@
+<style>
+  .securityDiv{
+    margin: 10px;
+    width:300px;
+  }
+
+  .w25{
+    width: 12px;
+    margin: 0px 5px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: center;
+  }
+
+  .w33{
+    width: calc(33% - 24px);
+  }
+
+</style>
+<div id="securityDiv.<?= $tabId ?>" class='securityDiv'>
+  <form id='securityForm.<?= $tabId ?>' class='table'>
+    <input type='hidden' name='userid' value='' />
+    <input type='hidden' name='id' value='' />
+    <div class='row ttl'> User Security </div>
+    <div class='row buttonRow'>
+      <div class='buttonRowWrap'>
+        <?= button($tabId,'Update', 'w33'); ?>
+        <?= button($tabId,'Insert', 'w33'); ?>
+        <?= button($tabId,'Delete', 'w33'); ?>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='cell lbl'> Name: </div>
+      <input class='cell intext readonly' type='textbox' name='name' readonly='true'/>
+    </div>
+    <div class='row'>
+      <div class='cell lbl'> Username: </div>
+      <input class='cell intext' type='textbox' name='username' />
+    </div>
+    <div class='row'>
+      <div class='cell lbl'> Password: </div>
+      <input class='cell intext' type='password' name='password' />
+    </div>
+    <div class='row'>
+      <div class='cell lbl'> Id: </div>
+      <input class='cell intext readonly' type='textbox' name='ids' readonly='true'/>
+    </div>
+    <div class='row' style='height: 30px;'>
+      <div class='cell lbl'> Active: </div>
+      <input class='cell' type='checkbox' name='active' />
+    </div>
+    <div class='row'>
+      <div class='cell'></div>
+      <div calss='cell'>
+        <div class='w25'> R </div>
+        <div class='w25'> I </div>
+        <div class='w25'> U </div>
+        <div class='w25'> D </div>
+      </div>
+    </div>
+    <?= $checks ?>
+  </form>
+</div>

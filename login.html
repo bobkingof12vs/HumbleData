@@ -1,0 +1,77 @@
+<head>
+  <link href="css/form.css" rel="stylesheet" type="text/css">
+  <style>
+    body{
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        background-color: #826644;
+        overflow: hidden;
+    }
+    #loginDiv{
+      position: absolute;
+      width:300px;
+      height:200px;
+      z-index:15;
+      top:50%;
+      left:50%;
+      margin:-120px 0 0 -170px;
+      background:#963f31;
+      border-radius: 25px;
+      border: 1px #fff solid;
+      box-shadow: 2px 2px 22px #222;
+      overflow: hidden;
+      padding: 20px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    #loginForm{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 300px;
+    }
+  </style>
+  <script src='js/general.js'></script>
+  <script src='js/request.js'></script>
+  <script src='js/formalize.js'></script>
+  <script>
+
+    function login(e){
+      e.preventDefault();
+      req.urlAPI = 'http://68.3.223.66:33033/pfs/api/login.php';
+      req.POST('login', function(data){
+        if(data.token !== undefined){
+          document.getElementById('token').value = data.token;
+          document.forms['loginForm'].submit.click();
+        }
+        else {
+          alert(data.error);
+        }
+      }, {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      });
+      window.removeEventListener("submit", login, true);
+      return false;
+    }
+
+    window.addEventListener("submit", login, true);
+
+    window.onload = function(){
+      formalize.buildForm('loginDiv', 'loginForm',[],[
+        {type: 'caption', caption: 'Please Log In: '},
+        {type: 'hidden', name: 'token', attributes: {value: ''}},
+        {type: 'textbox', label: 'Username', name: 'username'},
+        {type: 'password', label: 'Password', name: 'password'},
+        {type: 'submit', name: 'submit'}
+      ],{
+        method: 'post',
+        action: 'home.php'
+      });
+    }
+  </script>
+</head>
+<body>
+  <div id='loginDiv'>
+  </div>
+</body>
