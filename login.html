@@ -1,9 +1,10 @@
 <head>
   <link href="css/form.css" rel="stylesheet" type="text/css">
+  <link href="css/color.css" rel="stylesheet" type="text/css">
   <style>
     body{
         font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-        background-color: #826644;
+        background-color: var(--brown);
         overflow: hidden;
     }
     #loginDiv{
@@ -14,9 +15,9 @@
       top:50%;
       left:50%;
       margin:-120px 0 0 -170px;
-      background:#963f31;
+      background: var(--dark-red);
       border-radius: 25px;
-      border: 1px #fff solid;
+      border: 1px var(--white) solid;
       box-shadow: 2px 2px 22px #222;
       overflow: hidden;
       padding: 20px;
@@ -26,21 +27,55 @@
 
     #loginForm{
       position: absolute;
-      top: 50%;
+      top: 54%;
       transform: translateY(-50%);
       width: 300px;
     }
+    .lbl{
+      display: inline-block;;
+      position: relative;
+      width: 80px;
+      text-align: right;
+      padding: 5px;
+    }
+    input[name="username"], input[name="password"]{
+      display: inline-block;
+      position: relative;
+      width: 200px;
+      font-size: 14px;
+      padding-left: 3px;
+    }
+
+    input[name="submit"]{
+      padding: 1px;
+      line-height: 20px;
+      width: calc(60% - 10px);
+      text-align: center;
+      vertical-align: middle;
+      border: none;
+      margin: 5px;
+      margin-left: 20%;
+    }
+
+    #hd{
+      position: absolute;
+      font-size: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+
   </style>
   <script src='js/general.js'></script>
   <script src='js/request.js'></script>
-  <script src='js/formalize.js'></script>
   <script>
 
     function login(e){
       e.preventDefault();
-      req.urlAPI = 'http://68.3.223.66:33033/pfs/api/login.php';
+      req.urlAPI = 'http://68.110.126.152:33033/HumbleData/api/login.php';
       req.POST('login', function(data){
         if(data.token !== undefined){
+          window.removeEventListener("submit", login, true);
           document.getElementById('token').value = data.token;
           document.forms['loginForm'].submit.click();
         }
@@ -51,27 +86,22 @@
         username: document.getElementById('username').value,
         password: document.getElementById('password').value
       });
-      window.removeEventListener("submit", login, true);
       return false;
     }
 
     window.addEventListener("submit", login, true);
 
-    window.onload = function(){
-      formalize.buildForm('loginDiv', 'loginForm',[],[
-        {type: 'caption', caption: 'Please Log In: '},
-        {type: 'hidden', name: 'token', attributes: {value: ''}},
-        {type: 'textbox', label: 'Username', name: 'username'},
-        {type: 'password', label: 'Password', name: 'password'},
-        {type: 'submit', name: 'submit'}
-      ],{
-        method: 'post',
-        action: 'home.php'
-      });
-    }
   </script>
 </head>
 <body>
   <div id='loginDiv'>
+    <span id='hd'> Humble Data </span>
+    <form id='loginForm' method='post' action = 'home.php'>
+      <span class='lbl' style='text-align:left; width:200px'>Please Log In:</span>
+      <input id='token' type='hidden' name='token' value=''></input>
+      <br><span class='lbl'>Username:</span> <input id='username' type='textbox' name='username'></input>
+      <br><span class='lbl'>Password:</span> <input id='password' type='password' name='password'></input>
+      <input type='submit' name='submit'></input>
+    </form>
   </div>
 </body>

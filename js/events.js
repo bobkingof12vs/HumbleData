@@ -1,30 +1,29 @@
 window.onload = function(){
   console.log('running startup scripts');
   panes.startup(window.panePre);
-  document.getElementById('addTab').buttonFunction = function(e){tabs.tab(-1,"New Tab");}
+  document.getElementById('addTab').buttonFunction  = function(e){tabs.tab(-1,"New Tab"); return false;}
+  document.getElementById('leftTab').buttonFunction = function(e){tabs.moveTabs(-1); return false;}
+  document.getElementById('righTab').buttonFunction = function(e){tabs.moveTabs( 1); return false;}
   tabs.tab(-1,"New Tab");
-  scroll.bar(document.getElementById('tabs'), 'hide', 'none');
 }
 
 window.addEventListener('click',function(e){
 
   console.log('click',e);
-  e.preventDefault();
+  var runDefault = true;
+  var el = e.target;
 
-  if(e.target.buttonFunction != undefined){
-    e.target.buttonFunction(e);
+  while (el.buttonFunction === undefined){
+    el = el.parentNode;
+    if(el == document)
+      return;
   }
-  else{
-    el = e.target.parentNode;
-    while (el.buttonFunction === undefined){
-      el = el.parentNode;
-      if(el == document)
-        return
-    }
-    el.buttonFunction(e);
-  }
+  runDefault = el.buttonFunction(e);
 
-},true);
+  if(!runDefault)
+    e.preventDefault();
+
+},false);
 
 window.hasErr = function(errText,confirmText){
   console.log('called');
@@ -69,6 +68,6 @@ window.hasErr = function(errText,confirmText){
 }
 
 window.onresize = function(e){
-  if(window[tabs.js] != undefined && window[tab.js].onresize != undefined)
+  if(window[tabs.js] != undefined && window[tabs.js].onresize != undefined)
     window[tabs.js].onresize(tabs.focus);
 }

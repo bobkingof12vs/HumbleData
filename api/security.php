@@ -44,16 +44,21 @@
 
       if(empty($params['username']))
         exit (json_encode(array('error' => "Username cannot be left blank.")));
-        
+
       $db->newStmt("select username from user where id = ?")
         ->bind_param('s', $params['id']);
 
       if(empty($r = $db->results(sqli::GET_ROW)))
         exit (json_encode(array('error' => "Cannot update. Id: {$r['id']} doesn't have a user record")));
 
-      $db->newStmt("update user set username = ?, password = ?, permissions = ?, active = ?
-        where userid = ?"
-      )->bind_param('sssss',$params['username'], $params['password'], $params['permissions'], $params['active'], $params['userid']);
+      if($params['password'] === 'scram punk!')
+        $db->newStmt("update user set username = ?, permissions = ?, active = ?
+          where userid = ?"
+        )->bind_param('ssss',$params['username'], $params['permissions'], $params['active'], $params['userid']);
+      else
+        $db->newStmt("update user set username = ?, password = ?, permissions = ?, active = ?
+          where userid = ?"
+        )->bind_param('sssss',$params['username'], $params['password'], $params['permissions'], $params['active'], $params['userid']);
       $results = $db->results(sqli::ROWS_AFFECTED);
     break;
 

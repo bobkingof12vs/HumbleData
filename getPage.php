@@ -20,3 +20,12 @@
 
   $tabId = $_GET['tabId'];
   include($u);
+
+  function loadCss($path){
+    GLOBAL $tabId;
+    $css = file_get_contents($path);
+    $css = str_replace('$window','#window_'.$tabId,$css);
+    $css = str_replace('$tabId',$tabId,$css);
+
+    echo "\n<style>\n$css\n</style>\n";
+  }

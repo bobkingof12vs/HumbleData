@@ -1,0 +1,32 @@
+$window .securityDiv{
+  margin: 10px;
+  width: 250px;
+}
+
+$window .w25{
+  width: 12px;
+  margin: 0px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: center;
+}
+
+$window .w33{
+  width: calc(33% - 4px);
+  text-align: center;
+  display: inline-block;
+  vertical-align: center;
+}
+
+$window input[type="textbox"], input[name="password"] {
+  position: relative;
+  width: 66%;
+  display: inline-block;
+}
+
+$window .label {
+  width:32%;
+  text-align: right;
+  margin: 3px 0 0 0;
+  display: inline-block;
+}

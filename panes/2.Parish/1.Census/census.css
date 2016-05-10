@@ -1,0 +1,102 @@
+$window #censusAddressFormWrap_$tabId{
+  position: relative;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+$window .censuslist_$tabId{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+$window .censuslistWrap_$tabId{
+  top: 42px;
+  padding: 10px;
+}
+
+$window .censusDiv_$tabId{
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  padding:0px;
+  background-color: #aaa;
+  box-shadow: inset 0px 0px 5px #222;
+  overflow: hidden;
+}
+
+$window .censusListHeader{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  background-color: #A2BCE8;
+  box-shadow: inset 0px 5px 5px -5px #212, inset -5px 0px 5px -5px #222, inset 5px 0px 5px -5px #222, 0px 3px 3px -3px #222;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+
+$window #censusDiv_$tabId{
+  left: 10px;
+  width: 300px;
+}
+
+$window #householdDiv_$tabId{
+  left: 320px;
+  right: 10px;
+}
+
+$window #personForm_$tabId div{
+  display: block;
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+}
+
+$window #personForm_$tabId div * {
+  display: block;
+  float: left;
+}
+
+$window #personForm_$tabId div * {
+  display: block;
+  float: left;
+}
+
+$window #personForm_$tabId div label{
+  text-align: right;
+  width: 33%;
+  padding-right: 1%;
+}
+
+$window #personForm_$tabId div input{
+  width: 60%;
+}
+
+$window #personForm_$tabId div input[type='checkbox']{
+  width: auto;
+  text-align: right;
+}
+
+$window #personForm_$tabId div .shortlabel{
+  width: 25%;
+}
+
+$window #personForm_$tabId div div{
+  width: 66%;
+  height: 18px;
+  margin: 0;
+}
+
+$window #personForm_$tabId .hdr{
+  margin-top: 25px;
+  display: block;
+  text-align: center;
+}

@@ -6,7 +6,7 @@ getButtons = function(tabId){
 
       if(button.callback == undefined){
         console.log('button has no callback',button)
-        return false;
+        return true;
       }
 
       button.classList.add('pulse');
@@ -22,6 +22,7 @@ getButtons = function(tabId){
         document.removeEventListener('reqDone',listener,false);
       }
       document.addEventListener('reqDone',listener,false);
+      return false;
     }
   }
 

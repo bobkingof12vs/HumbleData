@@ -1,5 +1,5 @@
 
-var household = new (function(){
+window.census = new (function(){
   var _this = this;
   _this.tabData = [];
   this.open = function(tabId){
@@ -9,12 +9,35 @@ var household = new (function(){
         return hasErr(data.error,'Well I tried.');
       _this.addFields(tabId,data);
     });*/
+    var attempt = 0;
+    (function a(){
+      if(datefield('dob_', tabId))
+      return;
+      else if(attempt++ < 500)
+        setTimeout(a,10);
+      else
+        console.error('Div not found');
+    })();
 
-    scroll.bar(document.getElementById('familyListWrap_'+tabId), 'none', 'left');
-    document.getElementById('familyList_'+tabId).buttonFunction = function(e){
-      console.log(e.target.dataset, tabId);
-      _this.familyMemberClick(e, tabId);
-    }
+
+    (function b(){
+      if(phonefield('phone1_', tabId))
+      return;
+      else if(attempt++ < 500)
+        setTimeout(b,10);
+      else
+        console.error('Div not found');
+    })();
+
+
+    (function c(){
+      if(phonefield('phone2_', tabId))
+      return;
+      else if(attempt++ < 500)
+        setTimeout(c,10);
+      else
+        console.error('Div not found');
+    })();
   }
 
   this.close = function(tabId){
@@ -84,5 +107,9 @@ var household = new (function(){
     }, deleteData);
   }
 
+  this.dob_keyup = function(e){
+    e.target.value = justNumbers(e.target.value);
+  }
+
 })();
-console.log('loaded household.js',household);
+console.log('loaded census.js',census);

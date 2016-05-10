@@ -8,10 +8,11 @@ var search = new (function(){
   _this.searchWrap = document.createElement('div');
   _this.searchWrap.id = 'searchWrap'
 
-  _this.searchBox = formalize.addInput('search','textbox',{
-    className: 'searchBox',
-    placeholder: 'Search People'
-  });
+  _this.searchBox = document.createElement('input');
+  _this.searchBox.type = 'textbox';
+  _this.searchBox.id = 'search';
+  _this.searchBox.className = 'searchBox';
+  _this.searchBox.placeholder = 'Search People'
   _this.searchWrap.appendChild(_this.searchBox);
 
   _this.beenWaiting = 'not waiting';
@@ -50,210 +51,14 @@ var search = new (function(){
         if(window[tabs.js] !== undefined && window[tabs.js].changeContext !== undefined){
           window[tabs.js].changeContext(tabs.focus);
         }
+        return false;
       }
       list.appendChild(li);
     }
 
-      for(var i = 0; i < data.people.length; i++){
-        var li = document.createElement('li');
-        li.className = 'resultsListElement';
-        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-        li.title = "id: "+data.people[i].id+
-          "\nusername: "+ data.people[i].username;
-        li.context = data.people[i];
-        list.appendChild(li);
-      }
-
-      for(var i = 0; i < data.people.length; i++){
-        var li = document.createElement('li');
-        li.className = 'resultsListElement';
-        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-        li.title = "id: "+data.people[i].id+
-          "\nusername: "+ data.people[i].username;
-        li.context = data.people[i];
-        list.appendChild(li);
-      }
-
-      for(var i = 0; i < data.people.length; i++){
-        var li = document.createElement('li');
-        li.className = 'resultsListElement';
-        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-        li.title = "id: "+data.people[i].id+
-          "\nusername: "+ data.people[i].username;
-        li.context = data.people[i];
-        list.appendChild(li);
-      }
-
-      for(var i = 0; i < data.people.length; i++){
-        var li = document.createElement('li');
-        li.className = 'resultsListElement';
-        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-        li.title = "id: "+data.people[i].id+
-          "\nusername: "+ data.people[i].username;
-        li.context = data.people[i];
-        list.appendChild(li);
-      }
-
-          for(var i = 0; i < data.people.length; i++){
-            var li = document.createElement('li');
-            li.className = 'resultsListElement';
-            li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-            li.title = "id: "+data.people[i].id+
-              "\nusername: "+ data.people[i].username;
-            li.context = data.people[i];
-            list.appendChild(li);
-          }
-
-          for(var i = 0; i < data.people.length; i++){
-            var li = document.createElement('li');
-            li.className = 'resultsListElement';
-            li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-            li.title = "id: "+data.people[i].id+
-              "\nusername: "+ data.people[i].username;
-            li.context = data.people[i];
-            list.appendChild(li);
-          }
-
-          for(var i = 0; i < data.people.length; i++){
-            var li = document.createElement('li');
-            li.className = 'resultsListElement';
-            li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-            li.title = "id: "+data.people[i].id+
-              "\nusername: "+ data.people[i].username;
-            li.context = data.people[i];
-            list.appendChild(li);
-          }
-
-          for(var i = 0; i < data.people.length; i++){
-            var li = document.createElement('li');
-            li.className = 'resultsListElement';
-            li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-            li.title = "id: "+data.people[i].id+
-              "\nusername: "+ data.people[i].username;
-            li.context = data.people[i];
-            list.appendChild(li);
-          }
-
-              for(var i = 0; i < data.people.length; i++){
-                var li = document.createElement('li');
-                li.className = 'resultsListElement';
-                li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                li.title = "id: "+data.people[i].id+
-                  "\nusername: "+ data.people[i].username;
-                li.context = data.people[i];
-                list.appendChild(li);
-              }
-
-              for(var i = 0; i < data.people.length; i++){
-                var li = document.createElement('li');
-                li.className = 'resultsListElement';
-                li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                li.title = "id: "+data.people[i].id+
-                  "\nusername: "+ data.people[i].username;
-                li.context = data.people[i];
-                list.appendChild(li);
-              }
-
-              for(var i = 0; i < data.people.length; i++){
-                var li = document.createElement('li');
-                li.className = 'resultsListElement';
-                li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                li.title = "id: "+data.people[i].id+
-                  "\nusername: "+ data.people[i].username;
-                li.context = data.people[i];
-                list.appendChild(li);
-              }
-
-              for(var i = 0; i < data.people.length; i++){
-                var li = document.createElement('li');
-                li.className = 'resultsListElement';
-                li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                li.title = "id: "+data.people[i].id+
-                  "\nusername: "+ data.people[i].username;
-                li.context = data.people[i];
-                list.appendChild(li);
-              }
-
-                  for(var i = 0; i < data.people.length; i++){
-                    var li = document.createElement('li');
-                    li.className = 'resultsListElement';
-                    li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                    li.title = "id: "+data.people[i].id+
-                      "\nusername: "+ data.people[i].username;
-                    li.context = data.people[i];
-                    list.appendChild(li);
-                  }
-
-                  for(var i = 0; i < data.people.length; i++){
-                    var li = document.createElement('li');
-                    li.className = 'resultsListElement';
-                    li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                    li.title = "id: "+data.people[i].id+
-                      "\nusername: "+ data.people[i].username;
-                    li.context = data.people[i];
-                    list.appendChild(li);
-                  }
-
-                  for(var i = 0; i < data.people.length; i++){
-                    var li = document.createElement('li');
-                    li.className = 'resultsListElement';
-                    li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                    li.title = "id: "+data.people[i].id+
-                      "\nusername: "+ data.people[i].username;
-                    li.context = data.people[i];
-                    list.appendChild(li);
-                  }
-
-                  for(var i = 0; i < data.people.length; i++){
-                    var li = document.createElement('li');
-                    li.className = 'resultsListElement';
-                    li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                    li.title = "id: "+data.people[i].id+
-                      "\nusername: "+ data.people[i].username;
-                    li.context = data.people[i];
-                    list.appendChild(li);
-                  }
-
-                      for(var i = 0; i < data.people.length; i++){
-                        var li = document.createElement('li');
-                        li.className = 'resultsListElement';
-                        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                        li.title = "id: "+data.people[i].id+
-                          "\nusername: "+ data.people[i].username;
-                        li.context = data.people[i];
-                        list.appendChild(li);
-                      }
-
-                      for(var i = 0; i < data.people.length; i++){
-                        var li = document.createElement('li');
-                        li.className = 'resultsListElement';
-                        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                        li.title = "id: "+data.people[i].id+
-                          "\nusername: "+ data.people[i].username;
-                        li.context = data.people[i];
-                        list.appendChild(li);
-                      }
-
-                      for(var i = 0; i < data.people.length; i++){
-                        var li = document.createElement('li');
-                        li.className = 'resultsListElement';
-                        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                        li.title = "id: "+data.people[i].id+
-                          "\nusername: "+ data.people[i].username;
-                        li.context = data.people[i];
-                        list.appendChild(li);
-                      }
-
-                      for(var i = 0; i < data.people.length; i++){
-                        var li = document.createElement('li');
-                        li.className = 'resultsListElement';
-                        li.innerHTML = data.people[i].lastname+', '+data.people[i].firstname;
-                        li.title = "id: "+data.people[i].id+
-                          "\nusername: "+ data.people[i].username;
-                        li.context = data.people[i];
-                        list.appendChild(li);
-                      }
     _this.resultBox.appendChild(list);
+    console.log(((window.panes.numPanes - 2) * 28) + 'px')
+    document.getElementById('paneBody.Search').style.bottom = ((window.panes.numPanes - 2) * 28) + 'px'
 
   }
 
@@ -264,7 +69,6 @@ var search = new (function(){
     else{
       paneBody.appendChild(_this.searchWrap);
       paneBody.appendChild(_this.resultBox);
-      scroll.bar(_this.resultBox, 'none', 'left');
 
     }
   }

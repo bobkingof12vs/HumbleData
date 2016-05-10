@@ -1,4 +1,5 @@
 <?php
+  include('./general.php');
   include('./security.php');
   include('./sqli.php');
 

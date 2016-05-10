@@ -1,7 +1,7 @@
 req = new(function(){
 
-  this.urlAPI = 'http://68.3.223.66:33033/pfs/api.php';
-  this.urlHTML = 'http://68.3.223.66:33033/pfs/getPage.php';
+  this.urlAPI = 'http://68.110.126.152:33033//HumbleData//api.php';
+  this.urlHTML = 'http://68.110.126.152:33033//HumbleData//getPage.php';
 
   this.GET = function(type, callback, params){
     var p = (params == undefined ? {} : params);
@@ -26,7 +26,7 @@ req = new(function(){
           form.append(key, params[key]);
 
     var xhr = xhrRequest('POST', this.urlAPI);
-    xhr.callback = function(d){callback(JSON.parse(d))};
+    xhr.callback = function(d){callback(JSON.parse(d));};
     xhr.send(form);
   }
 
@@ -67,9 +67,13 @@ req = new(function(){
 
     xhr.onreadystatechange = function() {
       if(xhr.readyState == 4 && xhr.status == 200) {
-        console.log('xhr.responseText');
-        xhr.callback(xhr.responseText);
-        document.dispatchEvent(new Event('reqDone'));
+        if(1 != 1 && xhr.responseText.substring(1,1) == '<'){
+          console.error('invalid response text', xhr.responseText)
+        }
+        else{
+          xhr.callback(xhr.responseText);
+          document.dispatchEvent(new Event('reqDone'));
+        }
       }
     }
     return xhr;

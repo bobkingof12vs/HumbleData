@@ -1,0 +1,70 @@
+<?php loadCss(__DIR__."/census.css"); ?>
+<div id='censusDiv_<?=$tabId?>' class='censusDiv_<?=$tabId?>'>
+  <div class='censusListHeader'> Census Information </div>
+  <div id='censusListWrap_<?=$tabId?>' class='censuslistWrap_<?=$tabId?> censuslist_<?=$tabId?>'>
+    <form id='personForm_<?=$tabId?>'>
+
+      <div class='hdr'> Personal Information: </div>
+      <div>
+        <label for="firstname_<?=$tabId?>">First Name:</label>
+        <input type="text" name='firstname' id="firstname_<?=$tabId?>" />
+      </div>
+      <div>
+        <label for="middlename_<?=$tabId?>">Middle Name:</label>
+        <input type="text" name='middlename' id="middlename_<?=$tabId?>" />
+      </div>
+      <div>
+        <label for="lastname_<?=$tabId?>">Last Name:</label>
+        <input type="text" name='lastname' id="lastname_<?=$tabId?>" />
+      </div>
+      <div>
+        <label for="dob_<?=$tabId?>">Birthdate:</label>
+        <div id='dob_<?=$tabId?>'></div>
+      </div>
+      <div>
+        <label for="sex_<?=$tabId?>">Sex:</label>
+        <select name='sex' id="sex_<?=$tabId?>">
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </div>
+
+      <div class='hdr'> Contact Information: </div>
+      <div>
+        <label for="email_<?=$tabId?>">Email:</label>
+        <input type="text" name='email' id="email_<?=$tabId?>" />
+      </div>
+      <div>
+        <label for="email_check_<?=$tabId?>" class='shortlabel'>&nbsp</label>
+        <input type="checkbox" name='emailcheck' id="email_check_<?=$tabId?>" />
+        Please don't email
+      </div>
+      <div>
+        <label for="phone1_<?=$tabId?>">Phone 1:</label>
+        <div id='phone1_<?=$tabId?>'></div>
+      </div>
+      <div>
+        <label for="phone1_check_<?=$tabId?>" class='shortlabel'>&nbsp;</label>
+        <input type="checkbox" name='phone1check' id="phone1_check_<?=$tabId?>" />
+        Please don't call phone 1
+      </div>
+      <div>
+        <label for="phone2_<?=$tabId?>">Phone 2:</label>
+        <div id='phone2_<?=$tabId?>'></div>
+      </div>
+      <div>
+        <label for="phone2_check_<?=$tabId?>" class='shortlabel'>&nbsp;</label>
+        <input type="checkbox" name='phone2check' id="phone2_check_<?=$tabId?>" />
+        Please don't call phone 2
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div id='householdDiv_<?=$tabId?>' class='censusDiv_<?=$tabId?>'>
+  <div class='censusListHeader'> Household Information </div>
+  <div id='householdListWrap_<?=$tabId?>' class='censuslistWrap_<?=$tabId?> censuslist_<?=$tabId?>'>
+
+  </div>
+</div>

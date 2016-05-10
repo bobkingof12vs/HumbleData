@@ -31,7 +31,7 @@ var security = new(function(){
     _this.buttons.insert.callback = _this.insert;
     _this.buttons.delete.callback = _this.delete;
 
-    var secForm = getForm('securityForm.'+tabId);
+    var secForm = getForm('securityForm_'+tabId);
 
     secForm.val.id.value       = (!data ? '' : data.id);
     secForm.val.userid.value   = (!data ? '' : data.userid);
@@ -46,30 +46,37 @@ var security = new(function(){
   };
 
   this.generateNewSecNum = function(secForm){
-    var newSecNum = 0;
-    var i = secForm.length;
-    while(i--){
+    var secNumArray = [];
+    for(var i = 0; i < secForm.length; i++){
       if(secForm[i].type == 'checkbox' && secForm[i].checked && secForm[i].name != 'active'){
-        console.log('checked', secForm[i].name,secForm[i].value)
-        newSecNum += parseInt(secForm[i].value);
+        secNumArray[secForm[i].dataset.num - 1] = secNumArray[secForm[i].dataset.num - 1] === undefined
+          ? parseInt(secForm[i].value)
+          : secNumArray[secForm[i].dataset.num - 1] + parseInt(secForm[i].value)
+        console.log('checked', secForm[i].name, secForm[i].value, secNumArray[secForm[i].dataset.num - 1])
+
       }
     }
+
+    var newSecNum = '';
+    for(i = 0; i < secNumArray.length; i++)
+      newSecNum += parseInt(secNumArray[i]).toString(16);
+
     console.log(newSecNum.toString(2), newSecNum.toString(16));
-    return newSecNum.toString(16);
+    return newSecNum;
   }
 
-  this.setSecNumToForm = function(secForm,permissions){
-    var i = secForm.length;
-    while(i--)
-      if(secForm[i].type == 'checkbox' && secForm[i].name != 'active'){
-        console.log('secform check',((permissions & secForm[i].value) == secForm[i].value), permissions, secForm[i].value)
-        secForm[i].checked = ((parseInt(permissions,16) & secForm[i].value) == secForm[i].value);
+  this.setSecNumToForm = function(secForm, permissions){
+    for(var i = 0; i < secForm.length; i++){
+      if((permissions !== undefined) && secForm[i].type == 'checkbox' && secForm[i].name != 'active'){
+        console.log('secform check', secForm[i].dataset.num - 1, permissions.substring(secForm[i].dataset.num - 1, secForm[i].dataset.num), '['+permissions+']', secForm[i].value);
+        secForm[i].checked = ((parseInt(permissions.substring(secForm[i].dataset.num - 1,secForm[i].dataset.num),16) & secForm[i].value) == secForm[i].value);
       }
+    }
   }
 
   this.update = function(tabId){
 
-    var secForm = getForm('securityForm.'+tabId);
+    var secForm = getForm('securityForm_'+tabId);
 
     var putData = {
       permissions: _this.generateNewSecNum(secForm.asArray),
@@ -81,6 +88,7 @@ var security = new(function(){
     }
 
     req.PUT('security',function(data){
+      console.log(data, data.error);
       if(data.error !== undefined)
         return hasErr(data.error,'Wonder why that went wrong...')
       console.log('updated',data);
@@ -89,7 +97,7 @@ var security = new(function(){
 
   this.insert = function(tabId){
 
-    var secForm = getForm('securityForm.'+tabId);
+    var secForm = getForm('securityForm_'+tabId);
 
     var postData = {
       permissions: _this.generateNewSecNum(secForm.asArray),
@@ -100,6 +108,7 @@ var security = new(function(){
     }
 
     req.POST('security',function(data){
+      console.log(data, data.error);
       if(data.error !== undefined)
         return hasErr(data.error,'sucks for that user')
       console.log('inserted',data);
@@ -110,7 +119,7 @@ var security = new(function(){
 
   this.delete = function(tabId){
 
-    var secForm = getForm('securityForm.'+tabId);
+    var secForm = getForm('securityForm_'+tabId);
 
     var deleteData = {
       id: secForm.val.id.value,
@@ -119,6 +128,7 @@ var security = new(function(){
     }
 
     req.DELETE('security',function(data){
+      console.log(data, data.error);
       if(data.error !== undefined)
         return hasErr(data.error,"Why won't they just go away");
 

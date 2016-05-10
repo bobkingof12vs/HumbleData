@@ -11,19 +11,19 @@ var tabs = new (function(){
 
       _this.tabEls[tabId] = document.createElement('div');
       _this.tabEls[tabId].tid = tabId;
-      _this.tabEls[tabId].id = 'tab.'+_this.tabEls[tabId].tid;
-      _this.tabEls[tabId].buttonFunction = function(e){_this.changeFocus(e.target.tid);};
+      _this.tabEls[tabId].id = 'tab_'+_this.tabEls[tabId].tid;
+      _this.tabEls[tabId].buttonFunction = function(e){_this.changeFocus(e.target.tid); return false;};
       _this.tabEls[tabId].setAttribute('class', 'tab focus');
 
       _this.closeEls[tabId] = document.createElement('div');
       _this.closeEls[tabId].tid = tabId;
-      _this.closeEls[tabId].id = 'close.'+_this.tabEls[tabId].tid;
-      _this.closeEls[tabId].buttonFunction = function(e){_this.closeTab(e.target.tid);}
+      _this.closeEls[tabId].id = 'close_'+_this.tabEls[tabId].tid;
+      _this.closeEls[tabId].buttonFunction = function(e){_this.closeTab(e.target.tid); return false;}
       _this.closeEls[tabId].setAttribute('class', 'closeTab');
 
       _this.winEls[tabId] = document.createElement('div');
       _this.winEls[tabId].tid = tabId;
-      _this.winEls[tabId].id = 'window.'+_this.tabEls[tabId].tid;
+      _this.winEls[tabId].id = 'window_'+_this.tabEls[tabId].tid;
       _this.winEls[tabId].setAttribute('class', 'window');
 
       document.getElementById('tabs').insertBefore(_this.tabEls[tabId], document.getElementById('tabs').firstChild);
@@ -48,14 +48,14 @@ var tabs = new (function(){
           _this.loadedScripts.push(js.path);
           var scriptEl = document.createElement('script');
           scriptEl.setAttribute("type","text/javascript")
-          scriptEl.setAttribute("src", 'http://68.3.223.66:33033/pfs/'+js.path);
+          scriptEl.setAttribute("src", 'http://68.110.126.152:33033//HumbleData//'+js.path);
           document.getElementsByTagName("head")[0].appendChild(scriptEl);
 
           console.log('loaded Script: '+js.name);
 
         };
 
-        var maxTimeout = 5000;
+        var maxTimeout = 10000;
         var timeoutStart = (new Date).getTime();
         (function wait(){
           console.log('waiting for file: '+js.path)
@@ -82,12 +82,12 @@ var tabs = new (function(){
         _this.winEls[i].style.zIndex = 2;
       }
       else if(i < tid){
-        _this.tabEls[i].setAttribute('class', 'tab defocusL');
+        _this.tabEls[i].setAttribute('class', 'tab defocus');
         _this.tabEls[i].style.zIndex = _this.tabId - i;
         _this.winEls[i].style.zIndex = 1;
       }
       else{
-        _this.tabEls[i].setAttribute('class', 'tab defocusR');
+        _this.tabEls[i].setAttribute('class', 'tab defocus');
         _this.tabEls[i].style.zIndex = _this.tabId - i;
         _this.winEls[i].style.zIndex = 1;
       }
@@ -95,9 +95,44 @@ var tabs = new (function(){
   }
 
   this.closeTab = function(tid){
-    document.getElementById('home').removeChild(document.getElementById('window.'+tid));
-    document.getElementById('tab.'+tid).removeChild(document.getElementById('close.'+tid));
-    document.getElementById('tabs').removeChild(document.getElementById('tab.'+tid));
+    document.getElementById('home').removeChild(document.getElementById('window_'+tid));
+    document.getElementById('tab_'+tid).removeChild(document.getElementById('close_'+tid));
+    document.getElementById('tabs').removeChild(document.getElementById('tab_'+tid));
+  }
+
+  this.tabShift = 0;
+  this.moveTabs = function(leftRight){
+    if(leftRight < 0){
+      console.log('left');
+      var total = 0;
+      for(var i = 0; i < _this.tabEls.length; i++)
+        total += _this.tabEls[i].getBoundingClientRect().width + 2; //2 here is the padding between tabs;
+
+        console.log('1');
+      if(total < document.getElementById('tabs').getBoundingClientRect().width - 300)
+        return;
+
+                console.log('2');
+      for(i = _this.tabEls.length - 1; i >= 0; i--){
+        console.log(_this.tabEls[i].style.display);
+        if(_this.tabEls[i].children.length > 0 && _this.tabEls[i].style.display != 'none'){
+          _this.tabEls[i].style.display = 'none';
+          console.log('returning');
+          return;
+        }
+      }
+    }
+    else{
+      console.log('right');
+      for(i = 0; i < _this.tabEls.length; i++){
+        if(_this.tabEls[i].children.length > 0 && _this.tabEls[i].style.display == 'none'){
+          _this.tabEls[i].style.display = 'inline-block';
+          console.log('returning');
+          return;
+        }
+      }
+    }
+    console.log('passed');
   }
 
 })();
@@ -132,7 +167,7 @@ var panes = new (function(){
     headEl.id = 'paneHead.'+name;
     headEl.setAttribute('class', 'paneHead');
     headEl.innerHTML = name;
-    headEl.buttonFunction = function(e){_this.movePanes(e);}
+    headEl.buttonFunction = function(e){_this.movePanes(e); return false;}
     el.appendChild(headEl);
 
     var bodyEl = document.createElement('div');
@@ -149,7 +184,7 @@ var panes = new (function(){
       linkEl.php = links[i].children.php;
       linkEl.js = links[i].children.js;
       linkEl.linkTitle = links[i].name;
-      linkEl.buttonFunction = function(e){tabs.tab(tabs.focus, e.target.linkTitle, e.target.php.path, e.target.js, e.target.menu);}
+      linkEl.buttonFunction = function(e){tabs.tab(tabs.focus, e.target.linkTitle, e.target.php.path, e.target.js, e.target.menu); return false;}
       // if(links[i].menu !== undefined)
       //   linkEl.menu = links[i].menu;
       // else

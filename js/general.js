@@ -51,3 +51,24 @@ getForm = function(formId){
   console.log({val: asObj, asArray: arrayVals});
   return {val: asObj, asArray: arrayVals};
 }
+
+function justNumbers(val){
+  var val = parseInt(val, 10);
+  if(!isNaN(val))
+    return val;
+  else
+    return '';
+}
+
+testTextInput = function(el, test){
+  if(test){
+    el.style.borderBottom = '1px var(--dark-red) solid';
+    el.style.backgroundColor = 'var(--light-red)';
+    el.err = true;
+  }
+  else{
+    el.style.borderBottom = '1px var(--black) solid';
+    el.style.backgroundColor = 'inherit';
+    el.err = false;
+  }
+}

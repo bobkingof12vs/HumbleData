@@ -31,10 +31,27 @@
       }
     }
 
+    function logout($token){
+      $this->db
+        ->newStmt("select username from login where token = ? and loggedout = 0")
+        ->bind_param('s',$token);
+
+      $result = $this->db->results(sqli::GET_ROW);
+      if($result['username'] == $this->username){
+        $this->db->newStmt('update login set loggedout = 1 where token = ?')
+          ->bind_param('s',$token);
+        $this->db->results(sqli::ROWS_AFFECTED);
+        echo "logged out";
+        header('Location: '.dirname($_SERVER['SCRIPT_NAME']).'/login.html');
+        die();
+      }
+    }
+
     function checkSessionToken($token){
       $this->db
         ->newStmt('select username, time
           from login where token = ?
+          and loggedout = 0
           order by time desc')
         ->bind_param('s',$token);
       $result = $this->db->results(sqli::GET_ROW);
@@ -51,33 +68,32 @@
       }
     }
 
-    function getPermissions($asBin = false){
+    function getPermissions(){
       $this->db
         ->newStmt("select u.permissions
           from user u where username = ?")
         ->bind_param('s',$this->username);
       if(empty($permissions = $this->db->results(sqli::GET_ROW)))
         return false;
-      else
-        if($asBin)
-          return intval('0x'.$permissions['permissions'],0);
-        else
-          return $permissions['permissions'];
+      return $permissions['permissions'];
     }
 
     function checkPermission($permName,$riud){
 
-      if(!in_array($riud,array(self::READ,self::INSERT,self::UPDATE,self::DELETE)));
+      if(!in_array($riud,array(self::READ,self::INSERT,self::UPDATE,self::DELETE)))
+        exit(json_encode(array('error' => 'Invalid security state given')));
 
       $this->db
         ->newStmt("select securityId
           from security where name = ?")
         ->bind_param('s',$permName);
-      if(empty($secNum = $this->db->results(sqli::GET_ROW)))
-        exit('Invalid Permissions name...');
+      $secNum = $this->db->results(sqli::GET_ROW);
+      if(empty($secNum))
+        exit(json_encode(array('error' => 'Invalid Permissions name')));
 
-      $secNum = pow(2,(intval($secNum['securityId']) * 4) + $riud);
-      if(!(($this->getPermissions(true) & $secNum) == $secNum))
+      $secNum = substr($this->getPermissions(), $secNum['securityId'] - 1, 1);
+      $secNum = intval('0x'.$secNum, 0);
+      if(!(($secNum & $riud) == $riud))
         exit(json_encode(array('error' => 'You do not have permissions to do what you just tried to do')));
     }
   }
