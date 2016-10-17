@@ -3,7 +3,7 @@ A Parish Data Management Tool
 
 This is a personal project just to have fun with a data system.
 
-If you want to take a look, head here: http://68.110.126.152:33033/HumbleData/login.html
+If you want to take a look, head here: http://174.17.170.62/HumbleData/login.html
 
 And use the login `guest` and the password `test` 
 
