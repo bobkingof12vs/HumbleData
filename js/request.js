@@ -1,7 +1,7 @@
 req = new(function(){
 
-  this.urlAPI = 'http://71.209.146.93/hmbldt/HumbleData/api.php';
-  this.urlHTML = 'http://71.209.146.93/hmbldt/HumbleData/getPage.php';
+  this.urlAPI = 'http://184.101.5.162/hmbldt/HumbleData/api.php';
+  this.urlHTML = 'http://184.101.5.162/hmbldt/HumbleData/getPage.php';
 
   this.GET = function(type, callback, params){
     var p = (params == undefined ? {} : params);
