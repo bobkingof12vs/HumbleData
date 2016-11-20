@@ -72,7 +72,7 @@
 
     function login(e){
       e.preventDefault();
-      req.urlAPI = 'http://184.101.93.35/hmbldt/HumbleData/api/login.php';
+      req.urlAPI = 'http://174.17.180.177/hmbldt/HumbleData/api/login.php';
       req.POST('login', function(data){
         if(data.token !== undefined){
           window.removeEventListener("submit", login, true);
