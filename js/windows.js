@@ -48,7 +48,7 @@ var tabs = new (function(){
           _this.loadedScripts.push(js.path);
           var scriptEl = document.createElement('script');
           scriptEl.setAttribute("type","text/javascript")
-          scriptEl.setAttribute("src", 'http://174.17.188.112/hmbldt/HumbleData/'+js.path);
+          scriptEl.setAttribute("src", 'http://71.209.130.17/hmbldt/HumbleData/'+js.path);
           document.getElementsByTagName("head")[0].appendChild(scriptEl);
 
           console.log('loaded Script: '+js.name);
